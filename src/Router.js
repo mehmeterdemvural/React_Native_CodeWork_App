@@ -1,44 +1,43 @@
 import React from 'react';
-import {SafeAreaView, View, Button, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import Works from '../android/app/src/pages/Works';
-import {API_URL} from '@env';
-
-function HomeScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
-  );
-}
-
-function NotificationsScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
+import Jobs from './pages/Jobs';
+import JobDetail from './pages/JobDetail';
 
 function App() {
   const Stack = createNativeStackNavigator();
   const Drawer = createDrawerNavigator();
   const Tab = createBottomTabNavigator();
-  console.log(API_URL);
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="WorksPage" component={Works} />
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Notifications" component={NotificationsScreen} />
-      </Tab.Navigator>
+      <Stack.Navigator
+        initialRouteName="Jobs"
+        screenOptions={{
+          statusBarColor: '#7DB9B6',
+          navigationBarColor: '#7DB9B6',
+          headerTitleAlign: 'center',
+          headerStyle: {backgroundColor: '#7DB9B6'},
+          headerTitleStyle: {
+            color: '#E96479',
+            fontWeight: 'bold',
+            fontSize: 25,
+          },
+          headerTintColor: '#E96479',
+        }}>
+        <Stack.Screen
+          name="JobsPage"
+          component={Jobs}
+          options={{title: 'Jobs'}}
+        />
+        <Stack.Screen
+          name="JobDetailPage"
+          component={JobDetail}
+          options={{title: 'Job Detail'}}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
