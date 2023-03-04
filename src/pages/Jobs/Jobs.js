@@ -7,8 +7,10 @@ import useFetch from '../../hooks/useFetch';
 import LoadingPage from '../../components/LoadingPage';
 import ErrorPage from '../../components/ErrorPage';
 import JobsCard from '../../components/JobsCard';
+import { useFavoriteContext } from '../../contexts/FavoriteContext';
 
 function Jobs({navigation}) {
+  const {isLoading} = useFavoriteContext()
   const {fetchData, fetchError, fetchLoading, workFetch} = useFetch();
   const [page, setPage] = useState(1);
   
@@ -23,7 +25,7 @@ function Jobs({navigation}) {
     navigation.navigate('JobDetailPage', id);
   };
 
-  if (fetchLoading) {
+  if (fetchLoading || isLoading) {
     return <LoadingPage />;
   } else if (fetchError) {
     return <ErrorPage />;

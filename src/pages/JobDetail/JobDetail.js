@@ -14,8 +14,11 @@ import {API_URL} from '@env';
 import {styles} from './JobDetail.styles';
 import LoadingPage from '../../components/LoadingPage';
 import ErrorPage from '../../components/ErrorPage';
+import {useFavoriteContext} from '../../contexts/FavoriteContext';
 
 function JobDetail({navigation, route}) {
+  const {favorite, editFav} = useFavoriteContext();
+
   const {fetchData, fetchLoading, fetchError, workFetch} = useFetch();
 
   const jobId = route.params;
@@ -41,14 +44,11 @@ function JobDetail({navigation, route}) {
     },
   };
 
+  const findIsFavorite = favorite.find(favItem => favItem.id === fetchData.id);
   const onSub = () => {
-    console.log('onsub', fetchData.id);
     navigation.navigate('JobsPage');
   };
-  const onFav = () => {
-    console.log('onFav');
-    navigation.navigate('JobsPage');
-  };
+  const onFav = () => {editFav(fetchData, findIsFavorite); navigation.navigate('FavoritePage')};
 
   return (
     <ScrollView style={styles.container}>
@@ -88,8 +88,14 @@ function JobDetail({navigation, route}) {
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={onFav}>
           <View style={styles.buttonInnerContainer}>
-            <Icon style={styles.buttonIcon} name={'heart'} size={20} />
-            <Text style={styles.buttonText}>Favorite Job</Text>
+            <Icon
+              style={!findIsFavorite ? styles.buttonIcon : styles.buttonFav}
+              name={'heart'}
+              size={20}
+            />
+            <Text style={styles.buttonText}>
+              {!findIsFavorite ? 'Favorite' : 'Unfavorite'}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>

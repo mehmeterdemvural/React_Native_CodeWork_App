@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 
+
 const styles = StyleSheet.create({
   container: {backgroundColor: '#7DB9B6', padding: 5, paddingBottom: 10},
   headerContainer: {backgroundColor: '#F5E9CF', borderRadius: 10, padding: 5},
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   buttonIcon: {color: '#F5E9CF', marginRight: 5},
+  buttonFav: {color: '#E96479', marginRight: 5},
   buttonText: {color: '#F5E9CF', marginLeft: 5, fontSize: 20},
 });
 
