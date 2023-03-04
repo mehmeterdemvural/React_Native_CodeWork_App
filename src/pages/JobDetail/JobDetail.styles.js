@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
 
-
 const styles = StyleSheet.create({
   container: {backgroundColor: '#7DB9B6', padding: 5, paddingBottom: 10},
   headerContainer: {backgroundColor: '#F5E9CF', borderRadius: 10, padding: 5},
@@ -21,11 +20,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#4D455D',
-    marginTop: 5
+    marginTop: 5,
   },
   bodyContainer: {padding: 5},
   desc: {textAlign: 'justify', color: 'red', margin: 5},
-  buttonContainer: {flexDirection: 'row', margin: 5, marginBottom: 40},
+  buttonContainer: {
+    flexDirection: 'row',
+    margin: 5,
+    marginBottom: 40,
+    alignItems: 'center',
+  },
   button: {
     flex: 1,
     margin: 10,
@@ -37,10 +41,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
+    verticalAlign: 'middle',
+    height: 50,
   },
   buttonIcon: {color: '#F5E9CF', marginRight: 5},
   buttonFav: {color: '#E96479', marginRight: 5},
-  buttonText: {color: '#F5E9CF', marginLeft: 5, fontSize: 20},
+  buttonText: {
+    color: '#F5E9CF',
+    marginLeft: 5,
+    fontSize: 18,
+    textAlign: 'center',
+    flex: 1
+  },
 });
 
 export {styles};

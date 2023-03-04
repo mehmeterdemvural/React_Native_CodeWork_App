@@ -4,29 +4,26 @@ import {useState, useEffect, createContext, useContext} from 'react';
 const FavoriteContext = createContext();
 
 const FavoriteProvider = ({children}) => {
-
   const [favorite, setFavorite] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isFavoriteLoading, setIsFavoriteLoading] = useState(true);
 
   useEffect(() => {
     AsyncStorage.getItem('favorite')
       .then(data => {
         data && setFavorite(JSON.parse(data));
       })
-      .then(setIsLoading(false));
+      .then(setIsFavoriteLoading(false));
   }, []);
 
   useEffect(() => {
-    console.log(favorite.length);
     try {
       if (favorite.length > 0) {
-        console.log('çalıştı');
         AsyncStorage.setItem('favorite', JSON.stringify(favorite));
       } else {
         AsyncStorage.removeItem('favorite');
       }
     } catch (error) {
-      console.log('error', error.message);
+      console.log('Favorite Error : ', error.message);
     }
   }, [favorite]);
 
@@ -42,7 +39,7 @@ const FavoriteProvider = ({children}) => {
   const values = {
     favorite,
     editFav,
-    isLoading,
+    isFavoriteLoading,
   };
   return (
     <FavoriteContext.Provider value={values}>

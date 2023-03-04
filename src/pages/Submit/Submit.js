@@ -1,10 +1,28 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
+import JobsCard from '../../components/JobsCard';
 
-function Submit() {
+import {useSubmitContext} from '../../contexts/SubmitContext';
+import {styles} from './Submit.styles';
+
+function Submit({navigation}) {
+  const {subValues} = useSubmitContext();
+
+  const handleJobsSelect = id => {
+    navigation.navigate('JobDetailPage', id);
+  };
+
+  const renderSub = ({item}) => (
+    <JobsCard jobs={item} handlePress={() => handleJobsSelect(item.id)} />
+  );
+
   return (
-    <View>
-      <Text>Submit</Text>
+    <View style={styles.container}>
+      <FlatList
+        data={subValues}
+        renderItem={renderSub}
+        contentContainerStyle={{paddingBottom: 40}}
+      />
     </View>
   );
 }

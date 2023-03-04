@@ -4,10 +4,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {styles} from './JobsCard.styles';
 import {useFavoriteContext} from '../../contexts/FavoriteContext';
+import {useSubmitContext} from '../../contexts/SubmitContext';
 
 function JobsCard({jobs, handlePress}) {
   const {favorite} = useFavoriteContext();
+  const {subValues} = useSubmitContext();
   const findIsFavorite = favorite.find(favItem => favItem.id === jobs.id);
+  const findIsSubmit = subValues.find(subItem => subItem.id === jobs.id);
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.container}>
@@ -28,8 +31,15 @@ function JobsCard({jobs, handlePress}) {
           <Icon
             style={!findIsFavorite ? styles.buttonIcon : styles.buttonFav}
             name={'heart'}
-            size={20}
-          />
+            size={15}>
+            <Text style={styles.iconText}>inFav</Text>
+          </Icon>
+          <Icon
+            style={!findIsSubmit ? styles.buttonIcon : styles.buttonFav}
+            name={'login-variant'}
+            size={15}>
+            <Text style={styles.iconText}>Applied</Text>
+          </Icon>
           <Text style={styles.level}>{jobs.levels[0].name}</Text>
         </View>
       </View>

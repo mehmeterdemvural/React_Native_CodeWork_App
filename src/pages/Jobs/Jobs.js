@@ -7,25 +7,27 @@ import useFetch from '../../hooks/useFetch';
 import LoadingPage from '../../components/LoadingPage';
 import ErrorPage from '../../components/ErrorPage';
 import JobsCard from '../../components/JobsCard';
-import { useFavoriteContext } from '../../contexts/FavoriteContext';
+import {useFavoriteContext} from '../../contexts/FavoriteContext';
+import {useSubmitContext} from '../../contexts/SubmitContext';
 
 function Jobs({navigation}) {
-  const {isLoading} = useFavoriteContext()
+  const {isFavoriteLoading} = useFavoriteContext();
+  const {isSubLoading} = useSubmitContext();
   const {fetchData, fetchError, fetchLoading, workFetch} = useFetch();
   const [page, setPage] = useState(1);
-  
+
   useEffect(() => {
     workFetch(`${API_URL}?page=${page}`);
   }, []);
 
   const renderJobs = ({item}) => (
-    <JobsCard jobs={item} handlePress={()=> handleJobsSelect(item.id)} />
+    <JobsCard jobs={item} handlePress={() => handleJobsSelect(item.id)} />
   );
   const handleJobsSelect = id => {
     navigation.navigate('JobDetailPage', id);
   };
 
-  if (fetchLoading || isLoading) {
+  if (fetchLoading || isFavoriteLoading || isSubLoading) {
     return <LoadingPage />;
   } else if (fetchError) {
     return <ErrorPage />;

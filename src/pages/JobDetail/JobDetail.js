@@ -15,9 +15,11 @@ import {styles} from './JobDetail.styles';
 import LoadingPage from '../../components/LoadingPage';
 import ErrorPage from '../../components/ErrorPage';
 import {useFavoriteContext} from '../../contexts/FavoriteContext';
+import {useSubmitContext} from '../../contexts/SubmitContext';
 
 function JobDetail({navigation, route}) {
   const {favorite, editFav} = useFavoriteContext();
+  const {subValues, editSub} = useSubmitContext();
 
   const {fetchData, fetchLoading, fetchError, workFetch} = useFetch();
 
@@ -45,10 +47,16 @@ function JobDetail({navigation, route}) {
   };
 
   const findIsFavorite = favorite.find(favItem => favItem.id === fetchData.id);
+  const findIsSubmit = subValues.find(subItem => subItem.id === fetchData.id);
+
   const onSub = () => {
+    editSub(fetchData, findIsSubmit);
     navigation.navigate('JobsPage');
   };
-  const onFav = () => {editFav(fetchData, findIsFavorite); navigation.navigate('FavoritePage')};
+  const onFav = () => {
+    editFav(fetchData, findIsFavorite);
+    navigation.navigate('JobsPage');
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -82,8 +90,14 @@ function JobDetail({navigation, route}) {
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={onSub}>
           <View style={styles.buttonInnerContainer}>
-            <Icon style={styles.buttonIcon} name={'login'} size={20} />
-            <Text style={styles.buttonText}>Submit</Text>
+            <Icon
+              style={!findIsSubmit ? styles.buttonIcon : styles.buttonFav}
+              name={'login'}
+              size={20}
+            />
+            <Text style={styles.buttonText}>
+              {!findIsSubmit ? 'Apply' : 'Cancel The Application'}
+            </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={onFav}>
@@ -94,7 +108,7 @@ function JobDetail({navigation, route}) {
               size={20}
             />
             <Text style={styles.buttonText}>
-              {!findIsFavorite ? 'Favorite' : 'Unfavorite'}
+              {!findIsFavorite ? 'Add To Favorite' : 'Remove From Favorites'}
             </Text>
           </View>
         </TouchableOpacity>

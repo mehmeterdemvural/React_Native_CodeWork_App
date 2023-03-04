@@ -2,11 +2,14 @@ import React from 'react';
 
 import Router from './Router';
 import {FavoriteProvider} from './contexts/FavoriteContext';
+import {SubmitProvider} from './contexts/SubmitContext';
 
 function Wrapper() {
   return (
     <FavoriteProvider>
-      <Router />
+      <SubmitProvider>
+        <Router />
+      </SubmitProvider>
     </FavoriteProvider>
   );
 }
