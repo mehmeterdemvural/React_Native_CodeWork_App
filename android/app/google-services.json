@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "5227157448",
+    "project_id": "my-first-project-mev01",
+    "storage_bucket": "my-first-project-mev01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5227157448:android:670977b2b89afd6eb952fd",
+        "android_client_info": {
+          "package_name": "com.react_native_codework_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5227157448-p7q1tiaaj7minholda2jphr5ddq5jekp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGr0XY_u0rJY7esRJ5yhmDKcj1lxWJP-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5227157448-p7q1tiaaj7minholda2jphr5ddq5jekp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

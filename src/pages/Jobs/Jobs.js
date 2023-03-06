@@ -37,7 +37,7 @@ function Jobs({navigation}) {
       <FlatList
         data={fetchData.results}
         renderItem={renderJobs}
-        contentContainerStyle={{paddingBottom: 30, paddingTop: 5}}
+        contentContainerStyle={{paddingBottom: 50, paddingTop: 5}}
       />
     </View>
   );

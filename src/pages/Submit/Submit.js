@@ -21,7 +21,7 @@ function Submit({navigation}) {
       <FlatList
         data={subValues}
         renderItem={renderSub}
-        contentContainerStyle={{paddingBottom: 40}}
+        contentContainerStyle={{paddingBottom: 50}}
       />
     </View>
   );

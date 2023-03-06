@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {backgroundColor: '#7DB9B6', padding: 5, paddingBottom: 10},
+  container: {backgroundColor: '#7DB9B6', padding: 5, marginBottom: 20},
   headerContainer: {backgroundColor: '#F5E9CF', borderRadius: 10, padding: 5},
   headerInnerContainer: {padding: 5, flexDirection: 'row'},
   header: {

@@ -21,7 +21,7 @@ function Favorite({navigation}) {
       <FlatList
         data={favorite}
         renderItem={renderFav}
-        contentContainerStyle={{paddingBottom: 40}}
+        contentContainerStyle={{paddingBottom: 50}}
       />
     </View>
   );
