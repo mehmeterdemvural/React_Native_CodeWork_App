@@ -1,7 +1,10 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import {Formik} from 'formik';
+import {showMessage} from 'react-native-flash-message';
+import auth from '@react-native-firebase/auth';
 
+import authErrorMessageParser from '../../utils/authErrorMessageParser';
 import {styles} from './Signin.styles';
 import {signinSchema} from './SigninValidations';
 
@@ -11,7 +14,24 @@ const initialValues = {
 };
 
 function Signin() {
-  const handleSigninSubmit = values => console.log(values);
+  const handleSigninSubmit = async values => {
+    try {
+      await auth().signInWithEmailAndPassword(values.email, values.password);
+    } catch (error) {
+      showMessage({
+        message: 'ERROR',
+        description: authErrorMessageParser(error.code),
+        type: 'success',
+        duration: 5000,
+        floating: true,
+        statusBarHeight: 50,
+        backgroundColor: '#F5E9CF',
+        titleStyle: {color: '#E96479'},
+        textStyle: {color: '#4D455D'},
+      });
+      console.log(error.code);
+    }
+  };
 
   return (
     <View style={styles.container}>

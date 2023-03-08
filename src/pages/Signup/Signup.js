@@ -1,7 +1,10 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import {Formik} from 'formik';
+import {showMessage} from 'react-native-flash-message';
+import auth from '@react-native-firebase/auth';
 
+import authErrorMessageParser from '../../utils/authErrorMessageParser';
 import {styles} from './Signup.styles';
 import {signupSchema} from './SignupValidations';
 
@@ -11,8 +14,51 @@ const initialValues = {
   confirmPassword: '',
 };
 
-function Signup() {
-  const handleSignupSubmit = values => console.log(values);
+function Signup({navigation}) {
+  const handleSignupSubmit = async values => {
+    if (values.password !== values.confirmPassword) {
+      showMessage({
+        message: 'Passwords not match !',
+        type: 'success',
+        duration: 3000,
+        floating: true,
+        statusBarHeight: 50,
+        backgroundColor: '#F5E9CF',
+        titleStyle: {color: '#E96479'},
+        textStyle: {color: '#4D455D'},
+      });
+      return;
+    }
+    try {
+      await auth().createUserWithEmailAndPassword(
+        values.email,
+        values.password,
+      );
+      showMessage({
+        message: 'User created',
+        type: 'success',
+        duration: 3000,
+        floating: true,
+        statusBarHeight: 50,
+        backgroundColor: '#F5E9CF',
+        titleStyle: {color: '#E96479'},
+        textStyle: {color: '#4D455D'},
+      });
+      navigation.navigate('Signin');
+    } catch (error) {
+      showMessage({
+        message: authErrorMessageParser(error.code),
+        type: 'success',
+        duration: 3000,
+        floating: true,
+        statusBarHeight: 50,
+        backgroundColor: '#F5E9CF',
+        titleStyle: {color: '#E96479'},
+        textStyle: {color: '#4D455D'},
+      });
+      console.log(error.code);
+    }
+  };
   return (
     <View style={styles.container}>
       <Formik
