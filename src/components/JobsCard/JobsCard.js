@@ -17,7 +17,7 @@ function JobsCard({jobs, handlePress}) {
         <Text style={styles.header}>{jobs.name}</Text>
         <View style={styles.innerContainer}>
           <Text style={styles.title}>Category</Text>
-          <Text style={styles.item}>: {jobs.categories[0].name}</Text>
+          <Text style={styles.item}>: {jobs.categories[0] ? jobs.categories[0].name : 'Unknown'}</Text>
         </View>
         <View style={styles.innerContainer}>
           <Text style={styles.title}>Conpany</Text>
@@ -31,13 +31,13 @@ function JobsCard({jobs, handlePress}) {
           <Icon
             style={!findIsFavorite ? styles.buttonIcon : styles.buttonFav}
             name={'heart'}
-            size={15}>
+            size={12}>
             <Text style={styles.iconText}>inFav</Text>
           </Icon>
           <Icon
             style={!findIsSubmit ? styles.buttonIcon : styles.buttonFav}
             name={'login-variant'}
-            size={15}>
+            size={12}>
             <Text style={styles.iconText}>Applied</Text>
           </Icon>
           <Text style={styles.level}>{jobs.levels[0].name}</Text>

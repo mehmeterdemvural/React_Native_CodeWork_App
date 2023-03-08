@@ -20,9 +20,11 @@ function Jobs({navigation}) {
     workFetch(`${API_URL}?page=${page}`);
   }, []);
 
-  const renderJobs = ({item}) => (
-    <JobsCard jobs={item} handlePress={() => handleJobsSelect(item.id)} />
-  );
+  const renderJobs = ({item}) => {
+    return (
+      <JobsCard jobs={item} handlePress={() => handleJobsSelect(item.id)} />
+    );
+  };
   const handleJobsSelect = id => {
     navigation.navigate('JobDetailPage', id);
   };
